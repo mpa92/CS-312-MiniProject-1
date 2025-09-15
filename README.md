@@ -1,7 +1,5 @@
 # CS-312-MiniProject-1
 
-Repository for the CS-312 Mini Project 1: Blog Web Application
-
 A simple blog web application built with Node.js, Express.js, and EJS. This application allows users to create, view, edit, and delete blog posts without requiring a database.
 
 ## Features
