@@ -1,8 +1,8 @@
 /* Reset and Base Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body {
@@ -30,9 +30,9 @@ header {
 }
 
 header h1 {
-    color: #2c3e50;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    color:#2c3e50;
+    font-size:2.5rem;
+    margin-bottom:10px;
 }
 
 header p {
@@ -105,13 +105,13 @@ header p {
 }
 
 .btn-primary {
-    background-color: #3498db;
-    color: white;
+    background-color:#3498db;
+    color:white;
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
+    background-color:#2980b9;
+    transform:translateY(-2px);
 }
 
 .btn-secondary {
@@ -210,9 +210,9 @@ header p {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
-        margin: 0;
-        box-shadow: none;
+        padding:15px;
+        margin:0;
+        box-shadow:none;
     }
     
     header h1 {

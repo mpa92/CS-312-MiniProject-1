@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const serverPort = process.env.PORT || 3000;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 // Set EJS as the view engine
@@ -14,31 +14,42 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // In-memory storage for blog posts (no database)
-let posts = [];
+var blogPosts = [];
 
 // Routes
-app.get('/', (req, res) => {
-    res.render('index', { posts: posts });
+app.get('/', function(req, res) {
+    res.render('index', { posts: blogPosts });
 });
 
 app.post('/posts', (req, res) => {
-    const { title, author, content } = req.body;
+    const title = req.body.title;
+    const author = req.body.author;
+    const content = req.body.content;
+    
     const newPost = {
         id: Date.now().toString(),
         title: title,
         author: author,
         content: content,
-        createdAt: new Date().toLocaleString()
+        createdAt: new Date().toLocaleString(),
     };
-    posts.push(newPost);
+    blogPosts.push(newPost);
     res.redirect('/');
 });
 
-app.get('/posts/:id/edit', (req, res) => {
+app.get('/posts/:id/edit', function(req, res) {
     const postId = req.params.id;
-    const post = posts.find(p => p.id === postId);
-    if (post) {
-        res.render('edit', { post: post });
+    var foundPost = null;
+    
+    for (var i = 0; i < blogPosts.length; i++) {
+        if (blogPosts[i].id === postId) {
+            foundPost = blogPosts[i];
+            break;
+        }
+    }
+    
+    if (foundPost) {
+        res.render('edit', { post: foundPost });
     } else {
         res.redirect('/');
     }
@@ -46,28 +57,45 @@ app.get('/posts/:id/edit', (req, res) => {
 
 app.post('/posts/:id/edit', (req, res) => {
     const postId = req.params.id;
-    const { title, author, content } = req.body;
-    const postIndex = posts.findIndex(p => p.id === postId);
+    const title = req.body.title;
+    const author = req.body.author;
+    const content = req.body.content;
+    
+    var postIndex = -1;
+    for (var i = 0; i < blogPosts.length; i++) {
+        if (blogPosts[i].id === postId) {
+            postIndex = i;
+            break;
+        }
+    }
     
     if (postIndex !== -1) {
-        posts[postIndex] = {
+        blogPosts[postIndex] = {
             id: postId,
             title: title,
             author: author,
             content: content,
-            createdAt: posts[postIndex].createdAt,
+            createdAt: blogPosts[postIndex].createdAt,
             updatedAt: new Date().toLocaleString()
         };
     }
     res.redirect('/');
 });
 
-app.post('/posts/:id/delete', (req, res) => {
+app.post('/posts/:id/delete', function(req, res) {
     const postId = req.params.id;
-    posts = posts.filter(p => p.id !== postId);
+    var filteredPosts = [];
+    
+    for (var i = 0; i < blogPosts.length; i++) {
+        if (blogPosts[i].id !== postId) {
+            filteredPosts.push(blogPosts[i]);
+        }
+    }
+    
+    blogPosts = filteredPosts;
     res.redirect('/');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(serverPort, function() {
+    console.log('Server is running on http://localhost:' + serverPort);
 });

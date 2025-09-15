@@ -15,7 +15,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["blog", "nodejs", "express", "ejs"],
-  "author": "",
+  "keywords": ["blog", "nodejs", "express", "ejs", "crud", "webapp"],
+  "author": "Melvin",
   "license": "MIT"
 }
