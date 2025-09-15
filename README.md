@@ -29,11 +29,6 @@ A simple blog web application built with Node.js, Express.js, and EJS. This appl
    npm start
    ```
    
-   Or for development with auto-restart:
-   ```bash
-   npm run dev
-   ```
-
 2. Open your browser and navigate to `http://localhost:3000`
 
 ## Usage
@@ -45,12 +40,4 @@ A simple blog web application built with Node.js, Express.js, and EJS. This appl
 3. **Edit a Post**: Click the "Edit" button on any post to modify its content
 
 4. **Delete a Post**: Click the "Delete" button on any post to remove it (with confirmation)
-
-## Technical Details
-
-- **Backend**: Node.js with Express.js
-- **Template Engine**: EJS
-- **Styling**: Custom CSS with responsive design
-- **Data Storage**: In-memory array (posts don't persist between server restarts)
-- **Port**: 3000 (configurable via PORT environment variable)
 
